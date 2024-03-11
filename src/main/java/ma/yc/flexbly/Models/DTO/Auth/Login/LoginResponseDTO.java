@@ -1,11 +1,11 @@
-package ma.yc.flexbly.Models.DTO.Auth;
+package ma.yc.flexbly.Models.DTO.Auth.Login;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LoginResponse {
+public class LoginResponseDTO {
     private String email;
     private String token;
 }

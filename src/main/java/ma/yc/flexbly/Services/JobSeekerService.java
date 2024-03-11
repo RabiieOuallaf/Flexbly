@@ -16,9 +16,9 @@ public class JobSeekerService {
 
     public JobSeekerDTO getJobSeekerByEmail(String email) {
         JobSeekerEntity foundJobSeekerEntity = jobSeekerRepository.findByEmail(email);
-
+        System.out.println(foundJobSeekerEntity + "<=================================");
         if(foundJobSeekerEntity != null) {
-            JobSeekerDTO jobSeekerDTO = JobSeekerMapper.jobSeekerMapper.toDTO((foundJobSeekerEntity));
+            JobSeekerDTO jobSeekerDTO = JobSeekerMapper.jobSeekerMapper.toDTO(foundJobSeekerEntity);
             return jobSeekerDTO;
         } else {
             log.warn("JobSeeker with email: " + email + " not found");

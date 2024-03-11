@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import ma.yc.flexbly.Models.Entities.AdminEntity;
+import ma.yc.flexbly.Models.Entities.JobSeekerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,21 +31,32 @@ public class JwtUtil {
         this.jwtParser = Jwts.parser().setSigningKey(secret_key);
     }
 
-    public String generateToken(Object user) {
-        Map<String, Object> claims = new HashMap<>();
-        // Add any additional claims if needed
 
-        return createToken(claims, ((UserDetails) user).getUsername());
-    }
+    public String generateJobSeekerToken(JobSeekerEntity jobSeekerEntity) {
+        Claims claims = Jwts.claims().setSubject(jobSeekerEntity.getEmail());
+        claims.put("role", jobSeekerEntity.getRole());
+        claims.put("email", jobSeekerEntity.getEmail());
 
-    private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + access_token_validity))
                 .signWith(SignatureAlgorithm.HS256, secret_key)
                 .compact();
+    }
+
+    public String generateAdminToken(AdminEntity adminEntity) {
+        Claims claims = Jwts.claims().setSubject(adminEntity.getEmail());
+        claims.put("role", adminEntity.getRole());
+        claims.put("email", adminEntity.getEmail());
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + access_token_validity))
+                .signWith(SignatureAlgorithm.HS256, secret_key)
+                .compact();
+
     }
 
     public String getEmail(String token) {
