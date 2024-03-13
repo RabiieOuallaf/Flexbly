@@ -26,6 +26,11 @@ public class IndustryService {
                 log.warn("Industry with name: " + industryEntity.getName() + " already exists");
                 return null;
             }
+            IndustryEntity foundIndustryByName = industryRepository.findByName(industryEntity.getName());
+            if(foundIndustryByName != null) {
+                log.warn("Industry with name: " + industryEntity.getName() + " already exists");
+                return null;
+            }
             IndustryEntity createdIndustry = industryRepository.save(industryEntity);
             IndustryResponseDTO createdIndustryDTO = IndustryMapper.industryMapper.toResponseDTO(createdIndustry);
             return createdIndustryDTO;
