@@ -61,6 +61,15 @@ public class AuthController {
         }
 
     }
+    @PostMapping("/register/jobseeker")
+    public ResponseEntity<JobSeekerDTO> registerJobSeeker(@RequestBody JobSeekerDTO jobSeekerDTO) {
+        if (jobSeekerDTO == null) {
+            return ResponseEntity.status(400).body(null);
+        }
+
+        JobSeekerDTO createdJobSeeker = jobSeekerService.createJobSeeker(jobSeekerDTO);
+        return ResponseEntity.ok().body(createdJobSeeker);
+    }
 
 
     @PostMapping("/login/admin")
