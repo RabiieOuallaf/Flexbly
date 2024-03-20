@@ -16,24 +16,21 @@ public class JobSeekerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
-    private String image;
+    private String first_name;
+    private String last_name;
     private LocalDate birthdate;
     @Column(unique = true)
     private String email;
     @Column(columnDefinition = "varchar(255) default 'jobSeeker'")
     private String role;
 
-    private int industryId;
+    private int industry_id;
     private String password;
-    private String resumeUrl;
-    private String aboutMe;
 
     @Enumerated(EnumType.STRING)
-    private EducationLevelEnum educationLevel;
+    private EducationLevelEnum education_level;
 
-    private int educationInstituteId;
-    private int experienceId;
+    private int education_institute_id;
+
 
 }

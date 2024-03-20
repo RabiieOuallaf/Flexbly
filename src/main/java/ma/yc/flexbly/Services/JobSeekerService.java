@@ -1,7 +1,8 @@
 package ma.yc.flexbly.Services;
 
 import lombok.extern.slf4j.Slf4j;
-import ma.yc.flexbly.Models.DTO.JobSeeker.JobSeekerDTO;
+import ma.yc.flexbly.Models.DTO.JobSeeker.JobSeekerRequestDTO;
+import ma.yc.flexbly.Models.DTO.JobSeeker.JobSeekerResponseDTO;
 import ma.yc.flexbly.Models.Entities.JobSeekerEntity;
 import ma.yc.flexbly.Models.Mappers.JobSeekerMapper;
 import ma.yc.flexbly.Models.Repositories.JobSeekerRepository;
@@ -14,10 +15,10 @@ public class JobSeekerService {
     @Autowired
     JobSeekerRepository jobSeekerRepository;
 
-    public JobSeekerDTO getJobSeekerByEmail(String email) {
+    public JobSeekerResponseDTO getJobSeekerByEmail(String email) {
         JobSeekerEntity foundJobSeekerEntity = jobSeekerRepository.findByEmail(email);
         if(foundJobSeekerEntity != null) {
-            JobSeekerDTO jobSeekerDTO = JobSeekerMapper.jobSeekerMapper.toDTO(foundJobSeekerEntity);
+            JobSeekerResponseDTO jobSeekerDTO = JobSeekerMapper.jobSeekerMapper.toDTO(foundJobSeekerEntity);
             return jobSeekerDTO;
         } else {
             log.warn("JobSeeker with email: " + email + " not found");
@@ -25,7 +26,7 @@ public class JobSeekerService {
         }
     }
 
-    public JobSeekerDTO createJobSeeker(JobSeekerDTO jobSeekerDTO) {
+    public JobSeekerResponseDTO createJobSeeker(JobSeekerRequestDTO jobSeekerDTO) {
         JobSeekerEntity foundJobSeekerEntity = jobSeekerRepository.findByEmail(jobSeekerDTO.getEmail());
         if(foundJobSeekerEntity != null) {
             log.warn("JobSeeker with email: " + jobSeekerDTO.getEmail() + " already exists");
@@ -33,7 +34,7 @@ public class JobSeekerService {
         }
         JobSeekerEntity jobSeekerEntity = JobSeekerMapper.jobSeekerMapper.toEntity(jobSeekerDTO);
         JobSeekerEntity createdJobSeekerEntity = jobSeekerRepository.save(jobSeekerEntity);
-        JobSeekerDTO createdJobSeekerDTO = JobSeekerMapper.jobSeekerMapper.toDTO(createdJobSeekerEntity);
+        JobSeekerResponseDTO createdJobSeekerDTO = JobSeekerMapper.jobSeekerMapper.toDTO(createdJobSeekerEntity);
         return createdJobSeekerDTO;
     }
 }
