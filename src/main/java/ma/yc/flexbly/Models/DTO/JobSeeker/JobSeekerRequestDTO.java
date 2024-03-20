@@ -13,6 +13,7 @@ public class JobSeekerRequestDTO {
     private String birthdate;
     private String education_level;
     private String education_institute_id;
+    private int industry_id;
     private String role;
     private String password;
 }

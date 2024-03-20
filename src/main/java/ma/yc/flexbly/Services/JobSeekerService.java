@@ -33,6 +33,7 @@ public class JobSeekerService {
             return null;
         }
         JobSeekerEntity jobSeekerEntity = JobSeekerMapper.jobSeekerMapper.toEntity(jobSeekerDTO);
+
         JobSeekerEntity createdJobSeekerEntity = jobSeekerRepository.save(jobSeekerEntity);
         JobSeekerResponseDTO createdJobSeekerDTO = JobSeekerMapper.jobSeekerMapper.toDTO(createdJobSeekerEntity);
         return createdJobSeekerDTO;

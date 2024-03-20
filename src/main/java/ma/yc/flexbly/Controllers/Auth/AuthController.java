@@ -64,12 +64,11 @@ public class AuthController {
     }
     @PostMapping("/register/jobseeker")
     public ResponseEntity<JobSeekerResponseDTO> registerJobSeeker(@RequestBody JobSeekerRequestDTO jobSeekerDTO) {
-        System.out.println(jobSeekerDTO+ "<=====================");
         if (jobSeekerDTO == null) {
             return ResponseEntity.status(400).body(null);
         }
-
         JobSeekerResponseDTO createdJobSeeker = jobSeekerService.createJobSeeker(jobSeekerDTO);
+
         return ResponseEntity.ok().body(createdJobSeeker);
     }
 
