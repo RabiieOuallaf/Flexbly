@@ -11,7 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/education-institute")
+@RequestMapping("/api/v1/education-institute")
+@CrossOrigin("*")
 public class EducationInstituteController {
     @Autowired
     EducationInstituteService educationInstituteService;

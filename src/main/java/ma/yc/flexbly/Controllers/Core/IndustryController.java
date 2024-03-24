@@ -11,7 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/industry")
+@RequestMapping("/api/v1/industry")
+@CrossOrigin("*")
 public class IndustryController {
     @Autowired
     IndustryService industryService;
